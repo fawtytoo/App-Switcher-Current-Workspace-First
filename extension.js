@@ -55,11 +55,11 @@ function init()
         _manager = global.workspace_manager;
 
     windowTracker = Shell.WindowTracker.get_default();
-    settings = new Gio.Settings({ schema_id: 'org.gnome.shell.app-switcher' });
 }
 
 function enable()
 {
+    settings = new Gio.Settings({ schema_id: 'org.gnome.shell.app-switcher' });
     if (settings.get_boolean('current-workspace-only') == true)
         settings.reset('current-workspace-only'); // if the default value is FALSE or ...
 
@@ -70,4 +70,5 @@ function enable()
 function disable()
 {
     AltTab.AppSwitcher.prototype._init = _originalFunction;
+    settings = null;
 }
